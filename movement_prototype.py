@@ -1,5 +1,5 @@
 import pygame as pg
-from star_prototype import star
+from star_prototype import star as st
 
 
 class mainGame():
@@ -29,5 +29,3 @@ while isRunning:
                 isRunning = False
     pg.display.update()
     mainGame.clock.tick(60)
-import pygame as pg
-from star_prototype import star as st

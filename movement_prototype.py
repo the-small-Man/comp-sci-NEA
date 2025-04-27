@@ -8,13 +8,15 @@ class mainGame:
 
         self.clock = pg.time.Clock()
 
-        screen=pg.display.set_mode((0,0), pg.RESIZABLE)
+        self.screen=pg.display.set_mode((0,0), pg.RESIZABLE)
         pg.display.set_caption("Shadows Chasing Stars")
-        width=0
-        height=0
+        self.width=0
+        self.height=0
+        self.img = pg.image.load("background.png")
 
     def run(self):
         while True:
+            self.screen.blit(self.img, (0,0))
             for ev in pg.event.get():
                 if ev.type == pg.VIDEORESIZE:
                     self.width = ev.w

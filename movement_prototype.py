@@ -12,7 +12,7 @@ class mainGame:
         pg.display.set_caption("Shadows Chasing Stars")
         self.width=0
         self.height=0
-        self.img = pg.image.load("background.png")
+        self.img = pg.image.load("bg1.png")
 
     def run(self):
         while True:

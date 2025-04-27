@@ -8,10 +8,10 @@ class mainGame:
 
         self.clock = pg.time.Clock()
 
-    screen=pg.display.set_mode((0,0), pg.RESIZABLE)
-    pg.display.set_caption("Shadows Chasing Stars")
-    width=0
-    height=0
+        screen=pg.display.set_mode((0,0), pg.RESIZABLE)
+        pg.display.set_caption("Shadows Chasing Stars")
+        width=0
+        height=0
 
     def run(self):
         while True:

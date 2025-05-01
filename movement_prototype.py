@@ -18,10 +18,10 @@ class mainGame:
         self.charpos = [100,100]
         self.gravspd = [False, True]
         self.gravconst = 2
-
+        self.screen.blit(self.img, (0,0))
     def run(self):
         while True:
-            self.screen.blit(self.img, (0,0))
+
             self.screen.blit(self.chartemp, self.charpos)
             self.charpos[0] += self.movement[0]
             self.charpos[0] -= self.movement[1]

@@ -26,8 +26,8 @@ class mainGame:
             self.charpos[0] += self.movement[0]
             self.charpos[0] -= self.movement[1]
             self.charpos[1] += self.gravspd[1]
-            while self.gravspd < 10:
-                self.gravspd[1] += self.gravconst
+#            while self.gravspd < 10:
+#                self.gravspd[1] += self.gravconst
             for ev in pg.event.get():
                 if ev.type == pg.VIDEORESIZE:
                     self.width = ev.w

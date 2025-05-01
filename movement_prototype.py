@@ -14,20 +14,20 @@ class mainGame:
         self.height=0
         self.img = pg.image.load("bg1.png")
         self.chartemp = pg.image.load("longword.png")
-        self.movement = [False, False]
         self.charpos = [100,100]
-        self.gravspd = [False, True]
-        self.gravconst = 0.5
+        self.gravspd = 1
+        self.gravconst = 0.1
+        self.velo = [0,0]
 
     def run(self):
         while True:
             self.screen.blit(self.img, (0,0))
             self.screen.blit(self.chartemp, self.charpos)
-            self.charpos[0] += self.movement[0]
-            self.charpos[0] -= self.movement[1]
-            self.charpos[1] += self.gravspd[1]
+            self.charpos[0] += self.velo[0]
+            self.charpos[0] -= self.velo[1]
+            self.charpos[1] += self.gravspd
 #            while self.gravspd < 10:
-#                self.gravspd[1] += self.gravconst
+#               self.gravspd += self.gravconst
             for ev in pg.event.get():
                 if ev.type == pg.VIDEORESIZE:
                     self.width = ev.w
@@ -39,15 +39,16 @@ class mainGame:
                     if ev.key == pg.K_ESCAPE:
                         pg.quit()
                     if ev.key == pg.K_d:
-                        self.movement[0] = True
+                        self.velo[0] += 1
                     if ev.key == pg.K_a:
-                        self.movement[1] = True
+                        self.velo[1] += 1
                 #batch commands for when a key is UP
                 if ev.type == pg.KEYUP:
                     if ev.key == pg.K_d:
-                        self.movement[0] = False
+                        self.velo[0] -= 0.1
                     if ev.key == pg.K_a:
-                        self.movement[1] = False
+                        self.velo[1] -= 0.1
+
             pg.display.update()
             self.clock.tick(60)
 

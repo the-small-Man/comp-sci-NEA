@@ -18,10 +18,12 @@ class mainGame:
         self.gravspd = 1
         self.gravconst = 0.1
         self.velo = [0,0]
+        self.collision_floor = pg.Rect(0, 500, 500, 500)
 
     def run(self):
         while True:
-            self.screen.blit(self.img, (0,0))
+            #self.screen.blit(self.img, (0,0))
+            self.screen.fill((0,0,0))
             self.screen.blit(self.chartemp, self.charpos)
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
@@ -45,9 +47,9 @@ class mainGame:
                 #batch commands for when a key is UP
                 if ev.type == pg.KEYUP:
                     if ev.key == pg.K_d:
-                        self.velo[0] -= 0.1
+                        self.velo[0] -= 1
                     if ev.key == pg.K_a:
-                        self.velo[1] -= 0.1
+                        self.velo[1] -= 1
 
             pg.display.update()
             self.clock.tick(60)

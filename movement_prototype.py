@@ -42,14 +42,11 @@ class mainGame:
                         pg.quit()
                     if ev.key == pg.K_d:
                         self.velo[0] += 1
-                    if ev.key == pg.K_a:
+                    elif ev.key == pg.K_a:
                         self.velo[1] += 1
-                #batch commands for when a key is UP
-                if ev.type == pg.KEYUP:
-                    if ev.key == pg.K_d:
-                        self.velo[0] -= 1
-                    if ev.key == pg.K_a:
-                        self.velo[1] -= 1
+                    else:
+                        self.velo[0] *= 0.9
+                        self.velo[1] *= 0.9
 
             pg.display.update()
             self.clock.tick(60)

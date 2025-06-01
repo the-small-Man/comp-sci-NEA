@@ -15,7 +15,7 @@ class mainGame:
         self.img = pg.image.load("bg1.png")
         self.chartemp = pg.image.load("longword.png")
         self.charpos = [100,100]
-        self.gravspd = 1
+        self.gravspd = 0
         self.gravconst = 0.1
         self.velo = [0,0]
         self.collision_floor = pg.Rect(0, 500, 500, 500)
@@ -26,7 +26,7 @@ class mainGame:
             #self.screen.blit(self.img, (0,0))
             self.screen.fill((0,0,0))
             self.screen.blit(self.chartemp, self.charpos)
-            pg.draw.rect(self.screen, (50,50,50), width = 1500, rect = (1500, 20))
+            pg.draw.rect(self.screen, (50,50,50), rect = (60,1000, 1800, 20))
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
             self.charpos[1] += self.gravspd
@@ -47,16 +47,17 @@ class mainGame:
                     elif ev.key == pg.K_a:
                         self.velo[1] += 0.05
             if self.SCD > 0.9:
-                self.SCD -= 0.01
+                self.SCD -= 0.001
             elif ev.type == pg.KEYUP:
                 if ev.key == pg.K_d:
                     self.SCD = 1
                 if ev.key == pg.K_a:
                     self.SCD = 1
-            if self.floorcollision == True:
-                self.gravspd = 0
-            else:
-                self.gravspd = 1
+            if self.velo[0] < 0.0001 :
+                self.velo[0] = 0
+            if self.velo[1] < 0.0001 :
+                self.velo[1] = 0
+            
             self.velo[0] *= self.SCD
             self.velo[1] *= self.SCD
             

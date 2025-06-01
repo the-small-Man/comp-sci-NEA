@@ -19,6 +19,7 @@ class mainGame:
         self.gravconst = 0.1
         self.velo = [0,0]
         self.collision_floor = pg.Rect(0, 500, 500, 500)
+        self.SCD = 1
 
     def run(self):
         while True:
@@ -28,6 +29,7 @@ class mainGame:
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
             self.charpos[1] += self.gravspd
+            pg.key.set_repeat(1)
 #            while self.gravspd < 10:
 #               self.gravspd += self.gravconst
             for ev in pg.event.get():
@@ -41,13 +43,20 @@ class mainGame:
                     if ev.key == pg.K_ESCAPE:
                         pg.quit()
                     if ev.key == pg.K_d:
-                        self.velo[0] += 1
+                        self.velo[0] += 0.05
                     elif ev.key == pg.K_a:
-                        self.velo[1] += 1
-                    else:
-                        self.velo[0] *= 0.9
-                        self.velo[1] *= 0.9
-
+                        self.velo[1] += 0.05
+            if self.SCD > 0.9:
+                self.SCD -= 0.01
+            elif ev.type == pg.KEYUP:
+                if ev.key == pg.K_d:
+                    self.SCD = 1
+                if ev.key == pg.K_a:
+                    self.SCD = 1
+                
+            self.velo[0] *= self.SCD
+            self.velo[1] *= self.SCD
+            
             pg.display.update()
             self.clock.tick(60)
 

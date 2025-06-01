@@ -26,12 +26,12 @@ class mainGame:
             #self.screen.blit(self.img, (0,0))
             self.screen.fill((0,0,0))
             self.screen.blit(self.chartemp, self.charpos)
+            pg.draw.rect(self.screen, (50,50,50), width = 1500, rect = (1500, 20))
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
             self.charpos[1] += self.gravspd
+            self.floorcollision = False
             pg.key.set_repeat(1)
-#            while self.gravspd < 10:
-#               self.gravspd += self.gravconst
             for ev in pg.event.get():
                 if ev.type == pg.VIDEORESIZE:
                     self.width = ev.w
@@ -53,7 +53,10 @@ class mainGame:
                     self.SCD = 1
                 if ev.key == pg.K_a:
                     self.SCD = 1
-                
+            if self.floorcollision == True:
+                self.gravspd = 0
+            else:
+                self.gravspd = 1
             self.velo[0] *= self.SCD
             self.velo[1] *= self.SCD
             

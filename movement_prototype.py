@@ -43,19 +43,26 @@ class mainGame:
                     if ev.key == pg.K_ESCAPE:
                         pg.quit()
                     if ev.key == pg.K_d:
-                        self.velo[0] += 0.05
+                        self.velo[0] += 0.1
                     elif ev.key == pg.K_a:
-                        self.velo[1] += 0.05
+                        self.velo[1] += 0.1
+                    elif ev.key == pg.K_q:
+                        self.velo[1] += 1
+                    elif ev.key == pg.K_e:
+                        self.velo[0] += 1
+
             if self.SCD > 0.9:
                 self.SCD -= 0.001
+            elif self.SCD < 0.9:
+                self.SCD = 0.9
             elif ev.type == pg.KEYUP:
                 if ev.key == pg.K_d:
                     self.SCD = 1
                 if ev.key == pg.K_a:
                     self.SCD = 1
-            if self.velo[0] < 0.0001 :
+            if self.velo[0] < 0.089 :
                 self.velo[0] = 0
-            if self.velo[1] < 0.0001 :
+            if self.velo[1] < 0.089 :
                 self.velo[1] = 0
             
             self.velo[0] *= self.SCD

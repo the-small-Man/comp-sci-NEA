@@ -48,8 +48,10 @@ class mainGame:
                         self.velo[1] += 0.1
                     elif ev.key == pg.K_q:
                         self.velo[1] += 1
+                        self.SCD = 1
                     elif ev.key == pg.K_e:
                         self.velo[0] += 1
+                        self.SCD = 1
 
             if self.SCD > 0.9:
                 self.SCD -= 0.001

@@ -13,7 +13,10 @@ class mainGame:
         self.width=0
         self.height=0
         self.img = pg.image.load("bg1.png")
-        self.chartemp = pg.image.load("longword.png")
+        #self.chartemp = pg.image.load("longword.png")
+        self.chrimg = pg.image.load("longword.png").convert()
+        self.player = self.chrimg.get_rect()
+        self.player.center = (274, 109)
         self.charpos = [100,100]
         self.gravspd = 0
         self.gravconst = 0.1
@@ -23,9 +26,9 @@ class mainGame:
 
     def run(self):
         while True:
-            #self.screen.blit(self.img, (0,0))
-            self.screen.fill((0,0,0))
-            self.screen.blit(self.chartemp, self.charpos)
+            self.screen.blit(self.img, (0,0))
+            #self.screen.fill((0,0,0))
+            self.screen.blit(self.player, self.charpos)
             pg.draw.rect(self.screen, (50,50,50), rect = (60,1000, 1800, 20))
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
@@ -66,6 +69,14 @@ class mainGame:
                 self.velo[0] = 0
             if self.velo[1] < 0.089 :
                 self.velo[1] = 0
+            if pg.Rect.colliderect(self.player, self.collision_floor):
+                self.floorcollision = True
+            else:
+                self.floorcollision = False
+            if self.floorcollision == True:
+                self.gravspd = 0
+            else:
+                self.gravspd = 3
             
             self.velo[0] *= self.SCD
             self.velo[1] *= self.SCD

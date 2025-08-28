@@ -12,33 +12,32 @@ class mainGame:
         pg.display.set_caption("Shadows Chasing Stars")
         self.width=0
         self.height=0
-        self.img = pg.image.load("bg1.png")
-        #self.chartemp = pg.image.load("longword.png")
-        self.spritelist = pg.sprite.Group()
-        self.chrimg = pg.image.load("longword.png")
-        self.chrimgsprite = pg.sprite.Sprite()
-        self.chrimgsprite.img = self.chrimg
-        self.chrimgsprite.rect = self.chrimg.get_rect()
-        self.player = self.chrimg.get_rect()
-        self.player.center = (274, 109)
+
         self.charpos = [100,100]
+        self.img = pg.image.load("bg1.png")
+        self.chrimg = pg.image.load("longword.png")
+        self.hitbox = pg.Rect((self.charpos), (348,18))
+        # self.player = self.chrimg.get_rect()
+        # self.player.center = (274, 109)
         self.gravspd = 0
         self.gravconst = 0.1
         self.velo = [0,0]
         self.collision_floor = pg.Rect(0, 500, 500, 500)
         self.SCD = 1
+        self.floorcollision = False
     def run(self):
-        self.spritelist.add(self.chrimgsprite)
-        self.spritelist.add(self.collision_floor)
+
         while True:
-            self.screen.blit(self.img, (0,0))
-            #self.screen.fill((0,0,0))
-            self.spritelist.draw(self.screen)
+            self.hitbox.move_ip(self.velo[0], 0)
+            self.hitbox.move_ip(-self.velo[1], 0)
+            self.hitbox.move_ip(0, self.gravspd)
+            pg.draw.rect(self.screen, (255,255,255) , self.hitbox)
+            # self.screen.blit(self.img, (0,0)) 
+            self.screen.blit(self.chrimg, self.charpos)
             pg.draw.rect(self.screen, (50,50,50), rect = (60,1000, 1800, 20))
             self.charpos[0] += self.velo[0]
             self.charpos[0] -= self.velo[1]
             self.charpos[1] += self.gravspd
-            self.floorcollision = False
             pg.key.set_repeat(1)
             for ev in pg.event.get():
                 if ev.type == pg.VIDEORESIZE:
@@ -74,7 +73,7 @@ class mainGame:
                 self.velo[0] = 0
             if self.velo[1] < 0.089 :
                 self.velo[1] = 0
-            if pg.sprite.collide_mask(self.chrimg, self.collision_floor):
+            if pg.Rect.colliderect(self.hitbox, self.collision_floor):
                 self.floorcollision = True
             else:
                 self.floorcollision = False

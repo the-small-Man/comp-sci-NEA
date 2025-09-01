@@ -1,5 +1,5 @@
 import pygame as pg
-from star_prototype import star as st
+#from star_prototype import star as st
 
 
 class mainGame:
@@ -69,9 +69,9 @@ class mainGame:
                     self.SCD = 1
                 if ev.key == pg.K_a:
                     self.SCD = 1
-            if self.velo[0] < 0.089 :
+            if self.velo[0] < 0.08 :
                 self.velo[0] = 0
-            if self.velo[1] < 0.089 :
+            if self.velo[1] < 0.08 :
                 self.velo[1] = 0
             if pg.Rect.colliderect(self.hitbox, self.collision_floor):
                 self.floorcollision = True
@@ -81,6 +81,20 @@ class mainGame:
                 self.gravspd = 0
             else:
                 self.gravspd = 3
+
+            if self.charpos[1] > 1080:
+                self.charpos[1] = -18
+            if self.hitbox[1] > 1080:
+                self.hitbox[1] = -18
+            if self.charpos[0] > 1920:
+                self.charpos[0] = -348
+            if self.hitbox[0] > 1920:
+                self.hitbox[0] = -348
+            if self.charpos[1] < -350:
+                self.charpos[1] = 1919
+            if self.hitbox[1] < -350:
+                self.hitbox[1] = 1919
+
             
             self.velo[0] *= self.SCD
             self.velo[1] *= self.SCD

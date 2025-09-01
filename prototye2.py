@@ -11,3 +11,22 @@ class MainGame:
         self.width = 0
         self.height = 0
         self.bg = pg.image.load("bg1.png")
+
+    def update(self):
+
+        for ev in pg.event.get():
+            match ev.type:
+                case pg.QUIT:
+                    return False
+                case pg.VIDEORESIZE:
+                    self.width = ev.w
+                    self.height = ev.h
+
+    def run(self):
+        while True:
+
+
+            pg.display.update()
+            self.clock.tick(60)
+
+MainGame.run()

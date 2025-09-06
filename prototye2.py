@@ -21,12 +21,17 @@ class MainGame:
                 case pg.VIDEORESIZE:
                     self.width = ev.w
                     self.height = ev.h
+                case pg.KEYDOWN:
+                    match ev.key:
+                        case pg.K_ESCAPE:
+                           pg.quit()
 
     def run(self):
         while True:
-
+            
+            self.update()
 
             pg.display.update()
             self.clock.tick(60)
 
-MainGame.run()
+MainGame().run()
